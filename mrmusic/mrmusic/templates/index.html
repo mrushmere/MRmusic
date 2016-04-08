@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Music rating app</h2>
+<p><a href="{{ url_for('create') }}" class="btn btn-primary btn-large">Create/Clear the Voting Database &raquo;</a></p>
+<p><a href="{{ url_for('vote') }}" class="btn btn-primary btn-large">Vote &raquo;</a></p><br />
+<p><a href="{{ url_for('createreviews') }}" class="btn btn-primary btn-large">Create/Clear the Review Database &raquo;</a></p>
+<p><a href="{{ url_for('submitalbum') }}" class="btn btn-primary btn-large">Review &raquo;</a></p>
+<br />
+{% endblock %}

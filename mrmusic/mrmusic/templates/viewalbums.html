@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    {% extends "layout.html" %}
+    {% block content %}
+    <h2>Results of adding an album</h2>
+    <br />
+    {% for item in album_object.albuminfo %}
+    <div class="row">
+        <p> Name: {{album_object.Album}}</p><br/>
+        <p> Artist: {{album_object.Artist}}</p><br />
+        <p> Date: {{album_object.Release}}</p><br />
+    </div>
+    {% endfor %}
+    {% endblock %}
+</body>
+</html>

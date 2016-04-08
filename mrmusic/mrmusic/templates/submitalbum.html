@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    {% extends "layout.html" %}
+    {% block content %}
+    <h2>Submit an album review here!</h2>
+    <form action="" method="post" name="submitalbum">
+        {{form.Album}}
+        {{form.Artist}}
+        {{form.Release}}
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    {% endblock %}
+</body>
+</html>

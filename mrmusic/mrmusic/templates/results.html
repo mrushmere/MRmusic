@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    {% extends "layout.html" %}
+    {% block content %}
+    <h2>Results of the vote</h2>
+    <br />
+    {% for choice in vote_object.choices %}
+    <div class="row">
+        <div class="col-sm-5">{{choice}}</div>
+        <div class="col-sm-5">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{vote_object.choices[choice]}}" aria-valuemin="0" aria-valuemax="{{vote_object.total_votes}}" style="width: {{(vote_object.choices[choice]/vote_object.total_votes)*100}}%;">
+                    {{vote_object.choices[choice]}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <br />
+    <a class="btn btn-primary" href="{{ url_for('vote') }}">Vote again?</a>
+    {% endblock %}
+</body>
+</html>
