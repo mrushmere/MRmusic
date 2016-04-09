@@ -5,9 +5,9 @@ from __future__ import print_function
 import sys
 
 from datetime import datetime
-from flask import Flask, url_for, render_template
+from flask import Flask, render_template, request, url_for
 from mrmusic import app
-from forms import BestAlbumForm, AlbumReviewForm
+from forms import BestAlbumForm
 import config
 import pydocumentdb.document_client as document_client
 
@@ -154,54 +154,14 @@ def vote():
 
 @app.route('/submitalbum', methods=['GET', 'POST'])
 def submitalbum():
-    form = AlbumReviewForm()
-    if form.validate_on_submit():
-        client = document_client.DocumentClient(config.DOCUMENTDB_HOST, {'masterKey': config.DOCUMENTDB_KEY})
-        print('client connected', file=sys.stderr)
-        # Read databases and get the review one
-        databases = list(client.ReadDatabases())
-        for database in databases:
-            if database['id'] == config.DOCUMENTDB_REVIEWDATABASE:
-                db = database
-        print(db, file=sys.stderr)
-        print('It works!', file=sys.stderr)
-        # Read collections 
-        #coll = next((coll for coll in client.ReadCollections(db['_self']) if coll['id'] == config.DOCUMENTDB_REVIEWCOLLECTION))
-        collections = client.ReadCollections()
-        for col in collections:
-            if col['id'] == config.DOCUMENTDB_REVIEWCOLLECTION:
-                coll = col
+    return render_template('submitalbum.html')
 
-        # Create document
-        document = client.CreateDocument(coll['_self'],
-            { 'id': config.DOCUMENTDB_REVIEWDOCUMENT,
-              'Album': 'testing',
-              'Artist': 'testing',
-              'Release': 'testing',
-              'name': config.DOCUMENTDB_REVIEWDOCUMENT 
-            })
-
-
-        # Create a model to pass to albums.html
-        class AlbumObject:
-            albuminfo = dict()
-
-        album_object = AlbumObject()
-        album_object.albuminfo = {
-            "Album": document['Album'],
-            "Artist": document['Artist'],
-            "Release": document['Release']
-        }
-        return render_template(
-            'viewalbums.html',
-            album_object = album_object)
-    else:
-        return render_template(
-            'submitalbum.html', 
-            form = form)
-
-
-
-
+@app.route('/viewalbums/', methods=['POST'])
+def viewalbums():
+    if request.method == 'POST':
+        album = request.form['album']
+        artist = request.form['artist']
+        release = request.form['release']
+        return render_template('viewalbums.html', album=album, artist=artist, release=release)
 
 

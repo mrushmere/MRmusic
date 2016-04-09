@@ -8,8 +8,4 @@ class BestAlbumForm(Form):
         ('Emily\'s D+Evolution', 'Emily\'s D+Evolution')], 
         default='The Life of Pablo')
 
-class AlbumReviewForm(Form):
-    Album = StringField('Album')
-    Artist = StringField('Artist')
-    Release = DateField('Release')
 

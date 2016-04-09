@@ -10,13 +10,11 @@
     {% block content %}
     <h2>Results of adding an album</h2>
     <br />
-    {% for item in album_object.albuminfo %}
     <div class="row">
-        <p> Name: {{album_object.Album}}</p><br/>
-        <p> Artist: {{album_object.Artist}}</p><br />
-        <p> Date: {{album_object.Release}}</p><br />
+        <p> Name: {{album}}</p><br/>
+        <p> Artist: {{artist}}</p><br />
+        <p> Date: {{release}}</p><br />
     </div>
-    {% endfor %}
     {% endblock %}
 </body>
 </html>
